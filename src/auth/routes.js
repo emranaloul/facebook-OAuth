@@ -9,6 +9,7 @@ const bearerAuth = require('./middleware/bearer.js')
 const permissions = require('./middleware/acl.js')
 const multer = require('multer');
 const upload = multer();
+const oAuth = require('../auth/oauth')
 
 authRouter.post('/signup',upload.none(), async (req, res, next) => {
   try {
@@ -24,6 +25,9 @@ authRouter.post('/signup',upload.none(), async (req, res, next) => {
   }
 });
 
+authRouter.get('/oauth', oAuth, (req,res)=>{
+  res.json({token: req.token, user:req.user})
+})
 authRouter.post('/signin', basicAuth, (req, res, next) => {
   const user = {
     user: req.user,
@@ -64,5 +68,6 @@ authRouter.patch('/update', bearerAuth, permissions('update'), (req, res) => {
 authRouter.delete('/delete', bearerAuth ,  permissions('delete'), (req, res) => {
   res.send('You can delete something!!');
 });
+
 
 module.exports = authRouter;
