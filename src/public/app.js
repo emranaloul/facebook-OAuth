@@ -3,7 +3,7 @@ console.log('emran')
 const authorizeUrl = '//www.facebook.com/v10.0/dialog/oauth';
 const options = {
     client_id:'948670909282442',
-    redirect_uri:'http://localhost:5000/oauth',
+    redirect_uri:'https://emran-facebook-oauth.herokuapp.com/oauth',
     state:'{st=state123abc,ds=123456789}'
 }
 
